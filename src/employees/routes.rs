@@ -1,3 +1,8 @@
+use crate::employees::{Employee, Employees};
+use crate::error_handler::CustomError;
+use actix_web::{delete, get, post, put, web, HttpResponse};
+use serde_json::json;
+
 #[get("/employees")] //Get all employees
 async fn find_all() -> Result<HttpResponse, CustomError> {
     let employees = web::block(|| Employees::find_all()).await.unwrap();
